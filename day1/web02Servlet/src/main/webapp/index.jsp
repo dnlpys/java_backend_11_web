@@ -16,5 +16,8 @@
 	<a href="insertOK.do">insertOK</a>
 	<a href="updateOK.do">updateOK</a>
 	<a href="deleteOK.do">deleteOK</a>
+	<hr>
+	<a href="result.do">result</a>
+	<a href="result2.do">result2</a>
 </body>
 </html>
