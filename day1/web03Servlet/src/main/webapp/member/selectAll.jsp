@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,28 +13,41 @@
 	num id   pw   name tel
 	1  admin hi11 kim  011
 	2  admin hi22 kim  022
-	<table>
+	<table border="1">
+	<thead>
 		<tr>
-			<td>num</td>
-			<td>id</td>
-			<td>pw</td>
-			<td>name</td>
-			<td>tel</td>
+			<th>num</th>
+			<th>id</th>
+			<th>pw</th>
+			<th>name</th>
+			<th>tel</th>
 		</tr>
+	</thead>
+	<tbody>
+<%-- 		<c:forEach var="i" begin="1" end="10" step="1"> --%>
+<!-- 			<tr> -->
+<%-- 				<td>${i}</td> --%>
+<!-- 				<td>admin</td> -->
+<!-- 				<td>hi11</td> -->
+<!-- 				<td>kim</td> -->
+<!-- 				<td>011</td> -->
+<!-- 			</tr> -->
+<%-- 		</c:forEach> --%>
+		<c:forEach var="vo" items="${vos}">
+			<tr>
+				<td>${vo.num}</td>
+				<td>${vo.id}</td>
+				<td>${vo.pw}</td>
+				<td>${vo.name}</td>
+				<td>${vo.tel}</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+	<tfoot>
 		<tr>
-			<td>1 </td>
-			<td>admin</td>
-			<td>hi11</td>
-			<td>kim</td>
-			<td>011</td>
+			<td colspan="5">1 2 3 4 5</td>
 		</tr>
-		<tr>
-			<td>2 </td>
-			<td>admin</td>
-			<td>hi22</td>
-			<td>kim</td>
-			<td>022</td>
-		</tr>
+	</tfoot>
 	</table>
 </body>
 </html>

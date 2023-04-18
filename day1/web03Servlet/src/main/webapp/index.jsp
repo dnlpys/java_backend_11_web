@@ -11,7 +11,7 @@
 	<a href="index.do">index.do</a>
 	<a href="insert.do">insert.do</a>
 	<a href="selectAll.do">selectAll.do</a>
-	<a href="selectOne.do">selectOne.do</a>
+	<a href="selectOne.do?num=11">selectOne.do</a>
 	<hr>
 	<a href="insertOK.do">insertOK.do</a>
 	<a href="updateOK.do">updateOK.do</a>
