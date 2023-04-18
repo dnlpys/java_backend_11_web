@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet({ "/index.do", "/insert.do","/update.do", "/selectAll.do", "/selectOne.do" ,
 	"/insertOK.do","/updateOK.do","/deleteOK.do",
-	"/result.do","/result2.do"})
+	"/result.do","/result2.do","/searchList.do"})
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -58,7 +58,7 @@ public class MemberController extends HttpServlet {
 			vo2.setNum(1);
 			vo2.setId("admin");
 			vo2.setPw("hi111");
-			vo2.setName("kim11");
+			vo2.setName("kim11길동");
 			vo2.setTel("011");
 			
 			request.setAttribute("vo2", vo2);
@@ -73,6 +73,33 @@ public class MemberController extends HttpServlet {
 			//List<MemberVO> vos = dao.selectAll();
 			List<MemberVO> vos = new ArrayList<>();
 			for (int i = 0; i < 5; i++) {
+				MemberVO vo = new MemberVO();
+				vo.setNum(1+i);
+				vo.setId("admin"+(1+i));
+				vo.setPw("hi111"+(1+i));
+				vo.setName("kim11"+(1+i));
+				vo.setTel("011"+(1+i));
+				
+				vos.add(vo);
+			}
+			
+			System.out.println(vos);
+			request.setAttribute("vos", vos);
+			
+			request.getRequestDispatcher("member/selectAll.jsp").forward(request, response);
+		}else if(sPath.equals("/searchList.do")) {
+			
+			String searchKey = request.getParameter("searchKey");
+			String searchWord = request.getParameter("searchWord");
+			
+			System.out.println("searchKey:"+searchKey);
+			System.out.println("searchWord:"+searchWord);
+			
+			//아직없으니까 주석으로 대체(이전에 했었던 jdbc로직에 연동하면된다)
+			//MemberDAO dao =  new MemberDAOimpl();
+			//List<MemberVO> vos = dao.searchList(searchKey,searchWord);
+			List<MemberVO> vos = new ArrayList<>();
+			for (int i = 0; i < 3; i++) {
 				MemberVO vo = new MemberVO();
 				vo.setNum(1+i);
 				vo.setId("admin"+(1+i));

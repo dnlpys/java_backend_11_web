@@ -28,6 +28,14 @@
 				<td>${vo2.tel}</td>
 			</tr>
 	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="5">
+				<a href="update.do?num=${param.num}">update.do</a>
+				<a href="deleteOK.do?num=${param.num}">deleteOK.do</a>
+			</td>
+		</tr>
+	</tfoot>
 	</table>
 	
 </body>

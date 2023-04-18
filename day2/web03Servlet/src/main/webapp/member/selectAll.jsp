@@ -15,6 +15,7 @@
 			<option value="name">name</option>
 			<option value="tel">tel</option>
 		</select>
+		<input type="text" name="searchWord" value="ki">
 		<input type="submit">
 	</form>
 
@@ -40,7 +41,9 @@
 <%-- 		</c:forEach> --%>
 		<c:forEach var="vo" items="${vos}">
 			<tr>
-				<td>${vo.num}</td>
+				<td>				
+					<a href="selectOne.do?num=${vo.num}">${vo.num}</a>
+				</td>
 				<td>${vo.id}</td>
 				<td>${vo.pw}</td>
 				<td>${vo.name}</td>
@@ -56,3 +59,6 @@
 	</table>
 </body>
 </html>
+
+
+
