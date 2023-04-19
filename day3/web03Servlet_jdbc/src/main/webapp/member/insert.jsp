@@ -8,7 +8,9 @@
 </head>
 <body>
 	<h1>회원가입</h1>
-	<hr>
+	<jsp:include page="../top_menu.jsp"></jsp:include>
+	
+	
 	<form action="insertOK.do" method="post">
 	<table>
 		<tr>

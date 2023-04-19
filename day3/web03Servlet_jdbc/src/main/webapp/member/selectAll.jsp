@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>회원목록</h1>
-
+	<jsp:include page="../top_menu.jsp"></jsp:include>
 	<form action="searchList.do" method="get">
 		<select name="searchKey">
 			<option value="name">name</option>

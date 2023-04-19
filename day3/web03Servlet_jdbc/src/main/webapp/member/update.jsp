@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>update.jsp</h1>
+	<jsp:include page="../top_menu.jsp"></jsp:include>
 	
 	<form action="updateOK.do" method="post">
 	<table>

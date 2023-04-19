@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>회원정보</h1>
-	
+	<jsp:include page="../top_menu.jsp"></jsp:include>
 	<table border="1">
 	<thead>
 		<tr>
@@ -31,8 +31,8 @@
 	<tfoot>
 		<tr>
 			<td colspan="5">
-				<a href="update.do?num=${param.num}">update.do</a>
-				<a href="deleteOK.do?num=${param.num}">deleteOK.do</a>
+				<a href="update.do?num=${param.num}">회원수정</a>
+				<a href="deleteOK.do?num=${param.num}">회원삭제</a>
 			</td>
 		</tr>
 	</tfoot>

@@ -55,16 +55,8 @@ public class MemberController extends HttpServlet {
 			MemberVO vo = new MemberVO();
 			vo.setNum(Integer.parseInt(num));
 			
-			//아직없으니까 주석으로 대체(이전에 했었던 jdbc로직에 연동하면된다)
-			//MemberDAO dao =  new MemberDAOimpl();
-			//MemberVO vo2 = dao.selectOne(vo);
+			MemberVO vo2 = dao.selectOne(vo);
 			
-			MemberVO vo2 = new MemberVO();
-			vo2.setNum(1);
-			vo2.setId("admin");
-			vo2.setPw("hi111");
-			vo2.setName("kim11길동");
-			vo2.setTel("011");
 			
 			request.setAttribute("vo2", vo2);
 			
@@ -134,6 +126,7 @@ public class MemberController extends HttpServlet {
 			vo.setTel(tel);
 			
 			int result = dao.insert(vo);
+			System.out.println("result:"+result);
 			if(result==1)	
 				response.sendRedirect("selectAll.do");
 			else
@@ -159,12 +152,13 @@ public class MemberController extends HttpServlet {
 			vo.setName(name);
 			vo.setTel(tel);
 			
-			//아직없으니까 주석으로 대체(이전에 했었던 jdbc로직에 연동하면된다)
-			//MemberDAO dao = new MemberDAOimpl();
-			//int result = dao.update(vo);
-			//if(result==1)	
+			int result = dao.update(vo);
+			System.out.println("result:"+result);
+			if(result==1)	
+				response.sendRedirect("selectOne.do?num="+num);
+			else
+				response.sendRedirect("update.do?num="+num);
 			
-			response.sendRedirect("selectOne.do?num="+num);
 		}else if(sPath.equals("/deleteOK.do")) {
 			
 			String num = request.getParameter("num")==null?"0":request.getParameter("num");
@@ -173,12 +167,12 @@ public class MemberController extends HttpServlet {
 			MemberVO vo = new MemberVO();
 			vo.setNum(Integer.parseInt(num));
 			
-			//아직없으니까 주석으로 대체(이전에 했었던 jdbc로직에 연동하면된다)
-			//MemberDAO dao =  new MemberDAOimpl();
-			//int result = dao.delete(vo);
-			//System.out.println("result:"+result);
-			//if(result==1)
-			response.sendRedirect("selectAll.do");
+			int result = dao.delete(vo);
+			System.out.println("result:"+result);
+			if(result==1)
+				response.sendRedirect("selectAll.do");
+			else
+				response.sendRedirect("selectOne.do?num="+num);
 		}else if(sPath.equals("/result.do")) {
 			response.getWriter()
 			.append(request.getContextPath())

@@ -79,6 +79,47 @@ public class MemberDAOimpl implements MemberDAO {
 		System.out.println("update()..." + vo);
 		int flag = 0;
 
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_member.UPDATE);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPw());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getTel());
+			pstmt.setInt(5, vo.getNum());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
+		
 		return flag;
 	}
 
@@ -87,6 +128,43 @@ public class MemberDAOimpl implements MemberDAO {
 		System.out.println("delete()..." + vo);
 		int flag = 0;
 
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_member.DELETE);
+			pstmt.setInt(1, vo.getNum());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
+		
 		return flag;
 	}
 
