@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>selectAll.jsp</h1>
+	<h1>회원목록</h1>
 
 	<form action="searchList.do" method="get">
 		<select name="searchKey">
@@ -16,7 +16,7 @@
 			<option value="tel">tel</option>
 		</select>
 		<input type="text" name="searchWord" value="ki">
-		<input type="submit">
+		<input type="submit" value="검색">
 	</form>
 
 	<table border="1">
@@ -30,15 +30,6 @@
 		</tr>
 	</thead>
 	<tbody>
-<%-- 		<c:forEach var="i" begin="1" end="10" step="1"> --%>
-<!-- 			<tr> -->
-<%-- 				<td>${i}</td> --%>
-<!-- 				<td>admin</td> -->
-<!-- 				<td>hi11</td> -->
-<!-- 				<td>kim</td> -->
-<!-- 				<td>011</td> -->
-<!-- 			</tr> -->
-<%-- 		</c:forEach> --%>
 		<c:forEach var="vo" items="${vos}">
 			<tr>
 				<td>				

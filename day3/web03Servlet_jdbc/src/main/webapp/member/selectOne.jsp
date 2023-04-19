@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>selectOne.jsp ${param.num}</h1>
+	<h1>회원정보</h1>
 	
 	<table border="1">
 	<thead>

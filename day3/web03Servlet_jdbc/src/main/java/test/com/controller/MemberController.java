@@ -15,12 +15,13 @@ import test.com.model.MemberVO;
 /**
  * Servlet implementation class MemberController
  */
-@WebServlet({ "/index.do", "/insert.do","/update.do", "/selectAll.do", "/selectOne.do" ,
+@WebServlet({ "/index.do", "/insert.do","/update.do", 
+	"/selectAll.do", "/selectOne.do" ,
 	"/insertOK.do","/updateOK.do","/deleteOK.do",
 	"/result.do","/result2.do","/searchList.do"})
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	MemberDAO dao =  new MemberDAOimpl();   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -72,7 +73,7 @@ public class MemberController extends HttpServlet {
 		}else if(sPath.equals("/selectAll.do")) {
 			
 						
-			MemberDAO dao =  new MemberDAOimpl();
+			
 			List<MemberVO> vos = dao.selectAll();
 
 			
@@ -88,20 +89,8 @@ public class MemberController extends HttpServlet {
 			System.out.println("searchKey:"+searchKey);
 			System.out.println("searchWord:"+searchWord);
 			
-			//아직없으니까 주석으로 대체(이전에 했었던 jdbc로직에 연동하면된다)
-			//MemberDAO dao =  new MemberDAOimpl();
-			//List<MemberVO> vos = dao.searchList(searchKey,searchWord);
-			List<MemberVO> vos = new ArrayList<>();
-			for (int i = 0; i < 3; i++) {
-				MemberVO vo = new MemberVO();
-				vo.setNum(1+i);
-				vo.setId("admin"+(1+i));
-				vo.setPw("hi111"+(1+i));
-				vo.setName("kim11"+(1+i));
-				vo.setTel("011"+(1+i));
-				
-				vos.add(vo);
-			}
+			List<MemberVO> vos = dao.searchList(searchKey,searchWord);
+			
 			
 			System.out.println(vos);
 			request.setAttribute("vos", vos);
@@ -115,16 +104,10 @@ public class MemberController extends HttpServlet {
 			MemberVO vo = new MemberVO();
 			vo.setNum(Integer.parseInt(num));
 			
-			//아직없으니까 주석으로 대체(이전에 했었던 jdbc로직에 연동하면된다)
-			//MemberDAO dao =  new MemberDAOimpl();
-			//MemberVO vo2 = dao.selectOne(vo);
 			
-			MemberVO vo2 = new MemberVO();
-			vo2.setNum(1);
-			vo2.setId("admin");
-			vo2.setPw("hi111");
-			vo2.setName("kim11");
-			vo2.setTel("011");
+			MemberVO vo2 = dao.selectOne(vo);
+			
+			System.out.println(vo2);
 			
 			request.setAttribute("vo2", vo2);
 			
@@ -150,10 +133,12 @@ public class MemberController extends HttpServlet {
 			vo.setName(name);
 			vo.setTel(tel);
 			
-			//MemberDAO dao = new MemberDAOimpl();
-			//int result = dao.insert(vo);
-			//if(result==1)	
-			response.sendRedirect("selectAll.do");
+			int result = dao.insert(vo);
+			if(result==1)	
+				response.sendRedirect("selectAll.do");
+			else
+				response.sendRedirect("index.do");
+				
 		}else if(sPath.equals("/updateOK.do")) {
 			String num = request.getParameter("num")==null?"0":request.getParameter("num");
 			String id = request.getParameter("id");

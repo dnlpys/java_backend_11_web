@@ -29,6 +29,48 @@ public class MemberDAOimpl implements MemberDAO {
 		System.out.println("insert()..." + vo);
 		int flag = 0;
 
+		
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_member.INSERT);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPw());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getTel());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
+		
+		
 		return flag;
 	}
 
@@ -53,7 +95,52 @@ public class MemberDAOimpl implements MemberDAO {
 		System.out.println("selectOne()..." + vo);
 
 		MemberVO vo2 = new MemberVO();
-
+				
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_member.SELECT_ONE);
+			pstmt.setInt(1, vo.getNum());
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo2.setNum(rs.getInt("num"));
+				vo2.setId(rs.getString("id"));
+				vo2.setPw(rs.getString("pw"));
+				vo2.setName(rs.getString("name"));
+				vo2.setTel(rs.getString("tel"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
+		
 		return vo2;
 	}
 
@@ -122,6 +209,60 @@ public class MemberDAOimpl implements MemberDAO {
 		
 		List<MemberVO> vos = new ArrayList<>();
 
+		
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			if(searchKey.compareTo("name")==0) {
+				pstmt = conn.prepareStatement(OracleSQL_member.SEARCH_LIST_NAME);
+			}else {
+				pstmt = conn.prepareStatement(OracleSQL_member.SEARCH_LIST_TEL);
+			}
+			
+			pstmt.setString(1, "%"+searchWord+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setNum(rs.getInt("num"));
+				vo.setId(rs.getString("id"));
+				vo.setPw(rs.getString("pw"));
+				vo.setName(rs.getString("name"));
+				vo.setTel(rs.getString("tel"));
+				
+				vos.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
+		
+		
 		return vos;
 	}
 
