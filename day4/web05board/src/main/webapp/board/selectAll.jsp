@@ -15,7 +15,7 @@
 			<option value="title">title</option>
 			<option value="content">content</option>
 		</select>
-		<input type="text" name="searchWord" value="ki">
+		<input type="text" name="searchWord" value="sp">
 		<input type="submit" value="검색">
 	</form>
 

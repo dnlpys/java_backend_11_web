@@ -22,6 +22,7 @@ public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	BoardDAO dao = new BoardDAOimpl();
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -47,98 +48,113 @@ public class BoardController extends HttpServlet {
 		if (sPath.compareTo("/index.do") == 0) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (sPath.compareTo("/selectAll.do") == 0) {
-			
+
 			List<BoardVO> vos = dao.selectAll();
 			for (BoardVO x : vos) {
 				System.out.println(x);
 			}
 			request.setAttribute("vos", vos);
-			
+
 			request.getRequestDispatcher("board/selectAll.jsp").forward(request, response);
-		}else if (sPath.compareTo("/selectOne.do") == 0) {
-			
+		} else if (sPath.compareTo("/selectOne.do") == 0) {
+
 			String wnum = request.getParameter("wnum");
-			System.out.println("param.wnum:"+wnum);
-			
+			System.out.println("param.wnum:" + wnum);
+
 			BoardVO vo = new BoardVO();
 			vo.setWnum(Integer.parseInt(wnum));
 
 			dao.vcountUp(vo);
-			
+
 			BoardVO vo2 = dao.selectOne(vo);
 			System.out.println(vo2);
-			
-			
+
 			request.setAttribute("vo2", vo2);
-			
+
 			request.getRequestDispatcher("board/selectOne.jsp").forward(request, response);
-		}else if (sPath.compareTo("/update.do") == 0) {
-			
+		} else if (sPath.compareTo("/update.do") == 0) {
+
 			String wnum = request.getParameter("wnum");
-			System.out.println("param.wnum:"+wnum);
-			
+			System.out.println("param.wnum:" + wnum);
+
 			BoardVO vo = new BoardVO();
 			vo.setWnum(Integer.parseInt(wnum));
-			
+
 			BoardVO vo2 = dao.selectOne(vo);
 			System.out.println(vo2);
-			
+
 			request.setAttribute("vo2", vo2);
-			
+
 			request.getRequestDispatcher("board/update.jsp").forward(request, response);
-		}else if (sPath.compareTo("/updateOK.do") == 0) {
-			
+		} else if (sPath.compareTo("/updateOK.do") == 0) {
+
 			String wnum = request.getParameter("wnum");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
-			System.out.println("param.wnum:"+wnum);
-			System.out.println("param.title:"+title);
-			System.out.println("param.content:"+content);
-			
+			System.out.println("param.wnum:" + wnum);
+			System.out.println("param.title:" + title);
+			System.out.println("param.content:" + content);
+
 			BoardVO vo = new BoardVO();
 			vo.setWnum(Integer.parseInt(wnum));
 			vo.setTitle(title);
 			vo.setContent(content);
 			int result = dao.update(vo);
-			System.out.println("result:"+result);
-			if(result == 1)
-				response.sendRedirect("selectOne.do?wnum="+wnum);
+			System.out.println("result:" + result);
+			if (result == 1)
+				response.sendRedirect("selectOne.do?wnum=" + wnum);
 			else
-				response.sendRedirect("update.do?wnum="+wnum);
-		}else if (sPath.compareTo("/deleteOK.do") == 0) {
-			
+				response.sendRedirect("update.do?wnum=" + wnum);
+		} else if (sPath.compareTo("/deleteOK.do") == 0) {
+
 			String wnum = request.getParameter("wnum");
-			System.out.println("param.wnum:"+wnum);
-			
+			System.out.println("param.wnum:" + wnum);
+
 			BoardVO vo = new BoardVO();
 			vo.setWnum(Integer.parseInt(wnum));
 			int result = dao.delete(vo);
-			System.out.println("result:"+result);
-			if(result == 1)
+			System.out.println("result:" + result);
+			if (result == 1)
 				response.sendRedirect("selectAll.do");
 			else
-				response.sendRedirect("selectOne.do?wnum="+wnum);
-		}else if (sPath.compareTo("/insert.do") == 0) {
+				response.sendRedirect("selectOne.do?wnum=" + wnum);
+		} else if (sPath.compareTo("/insert.do") == 0) {
 			request.getRequestDispatcher("board/insert.jsp").forward(request, response);
-		}else if (sPath.compareTo("/insertOK.do") == 0) {
-			
+		} else if (sPath.compareTo("/insertOK.do") == 0) {
+
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			String writer = request.getParameter("writer");
-			System.out.println("param.title:"+title);
-			System.out.println("param.content:"+content);
-			System.out.println("param.writer:"+writer);
-			
+			System.out.println("param.title:" + title);
+			System.out.println("param.content:" + content);
+			System.out.println("param.writer:" + writer);
+
 			BoardVO vo = new BoardVO();
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setWriter(writer);
 			int result = dao.insert(vo);
-			System.out.println("result:"+result);
-			if(result == 1)
+			System.out.println("result:" + result);
+			if (result == 1)
 				response.sendRedirect("selectAll.do");
 			else
 				response.sendRedirect("insert.do");
+		} else if (sPath.compareTo("/searchList.do") == 0) {
+
+			
+			String searchKey = request.getParameter("searchKey");
+			String searchWord = request.getParameter("searchWord");
+			
+			System.out.println("param.searchKey:"+searchKey);
+			System.out.println("param.searchWord:"+searchWord);
+			
+			List<BoardVO> vos = dao.searchList(searchKey,searchWord);
+			for (BoardVO x : vos) {
+				System.out.println(x);
+			}
+			request.setAttribute("vos", vos);
+
+			request.getRequestDispatcher("board/selectAll.jsp").forward(request, response);
 		}
 
 	}// end doGet
