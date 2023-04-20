@@ -54,12 +54,52 @@ public class BoardDAOimpl implements BoardDAO {
 		System.out.println("selectOne()...." + vo);
 		
 		BoardVO vo2 = new BoardVO();
-		vo2.setWnum(11);
-		vo2.setTitle("title");
-		vo2.setContent("content");
-		vo2.setWriter("kim");
-		vo2.setWdate(new Timestamp(System.currentTimeMillis()));
-		vo2.setVcount(99);
+		
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_board.SELECT_ONE);
+			pstmt.setInt(1, vo.getWnum());
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo2.setWnum(rs.getInt("wnum"));
+				vo2.setTitle(rs.getString("title"));
+				vo2.setContent(rs.getString("content"));
+				vo2.setWriter(rs.getString("writer"));
+				vo2.setWdate(rs.getTimestamp("wdate"));
+				vo2.setVcount(rs.getInt("vcount"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
 		return vo2;
 	}
 

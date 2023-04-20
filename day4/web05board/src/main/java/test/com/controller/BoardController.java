@@ -55,6 +55,43 @@ public class BoardController extends HttpServlet {
 			request.setAttribute("vos", vos);
 			
 			request.getRequestDispatcher("board/selectAll.jsp").forward(request, response);
+		}else if (sPath.compareTo("/selectOne.do") == 0) {
+			
+			String wnum = request.getParameter("wnum");
+			System.out.println("param.wnum:"+wnum);
+			
+			BoardVO vo = new BoardVO();
+			vo.setWnum(Integer.parseInt(wnum));
+			
+			BoardVO vo2 = dao.selectOne(vo);
+			System.out.println(vo2);
+			
+			request.setAttribute("vo2", vo2);
+			
+			request.getRequestDispatcher("board/selectOne.jsp").forward(request, response);
+		}else if (sPath.compareTo("/update.do") == 0) {
+			
+			String wnum = request.getParameter("wnum");
+			System.out.println("param.wnum:"+wnum);
+			
+			BoardVO vo = new BoardVO();
+			vo.setWnum(Integer.parseInt(wnum));
+			
+			BoardVO vo2 = dao.selectOne(vo);
+			System.out.println(vo2);
+			
+			request.setAttribute("vo2", vo2);
+			
+			request.getRequestDispatcher("board/update.jsp").forward(request, response);
+		}else if (sPath.compareTo("/updateOK.do") == 0) {
+			
+			String wnum = request.getParameter("wnum");
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			System.out.println("param.wnum:"+wnum);
+			System.out.println("param.title:"+title);
+			System.out.println("param.content:"+content);
+			
 		}
 
 	}// end doGet
