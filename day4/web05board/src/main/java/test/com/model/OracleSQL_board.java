@@ -17,5 +17,8 @@ public interface OracleSQL_board {
 	String UPDATE = "update board set title=?,content=?,wdate=sysdate "
 			+ "where wnum=?";
 	
+	String UPDATE_VCOUNT = "update board set vcount=vcount+1 "
+			+ "where wnum=?";
+	
 	String DELETE = "delete from board where wnum=?";
 }

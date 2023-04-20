@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>글목록</h1>
+	<h1>글정보</h1>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 
 	<table border="1">

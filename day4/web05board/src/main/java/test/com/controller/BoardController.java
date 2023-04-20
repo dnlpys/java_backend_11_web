@@ -62,9 +62,12 @@ public class BoardController extends HttpServlet {
 			
 			BoardVO vo = new BoardVO();
 			vo.setWnum(Integer.parseInt(wnum));
+
+			dao.vcountUp(vo);
 			
 			BoardVO vo2 = dao.selectOne(vo);
 			System.out.println(vo2);
+			
 			
 			request.setAttribute("vo2", vo2);
 			
@@ -92,6 +95,50 @@ public class BoardController extends HttpServlet {
 			System.out.println("param.title:"+title);
 			System.out.println("param.content:"+content);
 			
+			BoardVO vo = new BoardVO();
+			vo.setWnum(Integer.parseInt(wnum));
+			vo.setTitle(title);
+			vo.setContent(content);
+			int result = dao.update(vo);
+			System.out.println("result:"+result);
+			if(result == 1)
+				response.sendRedirect("selectOne.do?wnum="+wnum);
+			else
+				response.sendRedirect("update.do?wnum="+wnum);
+		}else if (sPath.compareTo("/deleteOK.do") == 0) {
+			
+			String wnum = request.getParameter("wnum");
+			System.out.println("param.wnum:"+wnum);
+			
+			BoardVO vo = new BoardVO();
+			vo.setWnum(Integer.parseInt(wnum));
+			int result = dao.delete(vo);
+			System.out.println("result:"+result);
+			if(result == 1)
+				response.sendRedirect("selectAll.do");
+			else
+				response.sendRedirect("selectOne.do?wnum="+wnum);
+		}else if (sPath.compareTo("/insert.do") == 0) {
+			request.getRequestDispatcher("board/insert.jsp").forward(request, response);
+		}else if (sPath.compareTo("/insertOK.do") == 0) {
+			
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			String writer = request.getParameter("writer");
+			System.out.println("param.title:"+title);
+			System.out.println("param.content:"+content);
+			System.out.println("param.writer:"+writer);
+			
+			BoardVO vo = new BoardVO();
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setWriter(writer);
+			int result = dao.insert(vo);
+			System.out.println("result:"+result);
+			if(result == 1)
+				response.sendRedirect("selectAll.do");
+			else
+				response.sendRedirect("insert.do");
 		}
 
 	}// end doGet

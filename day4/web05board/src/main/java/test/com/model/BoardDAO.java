@@ -16,4 +16,6 @@ public interface BoardDAO {
 
 	public List<BoardVO> searchList(String searchKey, String searchWord);
 
+	public void vcountUp(BoardVO vo);
+
 }

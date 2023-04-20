@@ -29,7 +29,43 @@ public class BoardDAOimpl implements BoardDAO {
 	public int insert(BoardVO vo) {
 		System.out.println("insert()...." + vo);
 		int flag = 0;
-
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_board.INSERT);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getWriter());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
 		return flag;
 	}
 
@@ -37,6 +73,44 @@ public class BoardDAOimpl implements BoardDAO {
 	public int update(BoardVO vo) {
 		System.out.println("update()...." + vo);
 		int flag = 0;
+		
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_board.UPDATE);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getWnum());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
 
 		return flag;
 	}
@@ -45,7 +119,41 @@ public class BoardDAOimpl implements BoardDAO {
 	public int delete(BoardVO vo) {
 		System.out.println("delete()...." + vo);
 		int flag = 0;
-
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_board.DELETE);
+			pstmt.setInt(1, vo.getWnum());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
 		return flag;
 	}
 
@@ -182,6 +290,47 @@ public class BoardDAOimpl implements BoardDAO {
 		
 		
 		return vos;
+	}
+
+	@Override
+	public void vcountUp(BoardVO vo) {
+		System.out.println("vcountUp()...." + vo);
+		
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_board.UPDATE_VCOUNT);
+			pstmt.setInt(1, vo.getWnum());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
 	}
 
 }
