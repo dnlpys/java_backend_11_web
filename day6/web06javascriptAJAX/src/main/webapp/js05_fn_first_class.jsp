@@ -76,11 +76,27 @@
 		
 		console.log('clearInterval..');
 	},5000);
+	
+	window.onload = function(){
+		console.log('onload....');
+		document.querySelector('#h01').innerHTML = 'function...';
+		
+		document.querySelector('#h01').onclick = function(){
+// 			document.querySelector('#h01').innerHTML = 'click...';
+			this.innerHTML = 'click...';
+		};
+		
+	};
+	
+	
 </script>
 </head>
 <body>
 	<h1>js05_fn_first_class.jsp</h1>
 	<jsp:include page="top_menu.jsp"></jsp:include>
-	
+	<h1 id="h01">hello</h1>
+	<script type="text/javascript">
+		console.log('end body....');
+	</script>
 </body>
 </html>
