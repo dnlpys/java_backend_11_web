@@ -12,6 +12,9 @@
   <li><a href="js04_function2.jsp">js04_function2.jsp</a></li>
   <li><a href="js04_function3.jsp">js04_function3.jsp</a></li>
   <li><a href="js05_fn_first_class.jsp">js05_fn_first_class.jsp</a></li>
+  <li><a href="js06_event.jsp">js06_event.jsp</a></li>
+  <li><a href="js06_event2.jsp">js06_event2.jsp</a></li>
+  <li><a href="js07_ajax.jsp">js07_ajax.jsp</a></li>
 </ol>
 
 <hr>
