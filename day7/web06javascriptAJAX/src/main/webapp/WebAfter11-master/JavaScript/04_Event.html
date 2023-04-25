@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mouse Event</title>
+<script>
+	// 이벤트 처리 - 함수
+	function disp() { // 찾아가는 과정을 이벤트 핸들러
+		alert("왜불러??");
+	}
+
+	function sub() {
+		alert("나는 sub 함수입니다");
+	}
+
+	function aa() {
+		var su = prompt("원하는숫자를 넣으세요", "정수형 1~10");
+		alert(su);
+	}
+
+	function bb() {
+		var result = confirm("정말로 삭제??");
+		if (result == true) {
+			// HTML, CSS, Javascript --> Server --> Servlet / JSP --> JAVA --> DB 
+			alert("삭제되었습니다");
+		} else {
+			alert("취소되었습니다");
+		}
+	}
+
+	function cc(su) { // su=10
+		alert(su);
+	}
+</script>
+</head>
+<body>
+	<!-- 마우스 이벤트 : onclick, onmousedown, onmouseup,
+         ondblclick, mouseover, mouseout-->
+	<h3>On Click</h3>
+	<input type="button" value="확인1" onclick="disp()" />
+
+	<a href="#" style="text-decoration: none"> <span onclick="disp()">마우스를
+			클릭하세요.</span>
+	</a>
+	<br />
+	<br />
+
+	<input type="button" value="확인2" onmousedown="disp()" />
+	<input type="button" value="확인3" onmouseup="sub()" />
+	<input type="button" value="확인4" ondblclick="sub()" />
+	<br />
+	<br />
+
+	<input type="button" value="확인5" onclick="aa()" />
+	<input type="button" value="확인6" onclick="bb()" />
+	<br />
+	<br />
+
+	<a href="#" style="text-decoration: none;" onclick="cc(10)">안녕하세요.</a>
+</body>
+</html>

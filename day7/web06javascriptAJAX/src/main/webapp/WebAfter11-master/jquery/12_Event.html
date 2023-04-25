@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이벤트</title>
+<!--     <script src="./jquery.js"></script> -->
+<!--     <script src="jquery-3.6.4.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+	$(function() {
+		console.log('onload....');
+
+		$('#h01').click(function(){
+			console.log('click...');
+		});
+		
+		$('#h02').dblclick(function(){
+			console.log('dblclick...');
+		});
+		
+		$('#h03').mouseover(function(){
+			console.log('mouseover...');
+		});
+		$('#h03').mouseout(function(){
+			console.log('mouseout...');
+		});
+		
+		$('#h04').mouseenter(function(){
+			console.log('mouseenter...');
+		});
+		$('#h04').mouseleave(function(){
+			console.log('mouseleave...');
+		});
+		
+		//모든 input
+// 		$('input').focus(function(){
+// 			console.log('focus...');
+// 		});
+// 		$('input').blur(function(){
+// 			console.log('blur...');
+// 		});
+		
+		
+		//type="text" 에 한정해서
+		$('[type="text"]').focus(function(){
+			console.log('focus...');
+		});
+		$('[type="text"]').blur(function(){
+			console.log('blur...');
+		});
+		
+	
+	});
+</script>
+
+</head>
+<body>
+	<h1 id="h01">event1 click</h1>
+	<h1 id="h02">event2 double click</h1>
+	<h1 id="h03">event3 mouse over & out</h1>
+	<h1 id="h04">event4 mouse enter & leave</h1>
+	
+	<form action="#">
+		<input type="text" value="aaa">
+		<input type="text" value="bbb">
+		<input type="checkbox" value="ccc">ccc
+	</form>
+	
+</body>
+</html>

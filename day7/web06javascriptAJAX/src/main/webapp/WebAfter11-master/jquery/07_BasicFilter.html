@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기본 필터 선택자</title>
+<style>
+.display01 {
+	background-color: #EEEEEE;
+	padding: 10px;
+	width: 40px;
+	float:left;
+	margin:5px;
+}
+.display02 {
+	background-color: #666666;
+	padding: 10px;
+	width: 40px;
+	float:left;
+	margin:5px;
+}
+.display03 {
+	background-color: #669966;
+	padding: 10px;
+	width: 50px;
+	margin:5px;
+}
+.display04 {
+	background-color: #666699;
+	padding: 10px;
+	width: 50px;
+	margin:5px;
+}
+</style>
+<!--     <script src="./jquery.js"></script> -->
+<!--     <script src="jquery-3.6.4.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+	$(function() {
+		console.log('onload....');
+
+		$('p').addClass('display01');
+		$('p:eq(0)').addClass('display02');
+		$('p:eq(1)').addClass('display02');
+		$('p:eq(2)').addClass('display02');
+		$('p:eq(-1)').addClass('display02');
+
+		$('.first li').addClass('display03');
+		
+		$('.second li').addClass('display04');
+		
+		
+		
+	});
+</script>
+</head>
+<body>
+	<p>1월</p>
+	<p>2월</p>
+	<p>3월</p>
+	<p>4월</p>
+	<p>5월</p>
+	<p>6월</p>
+	<p>7월</p>
+	<p>8월</p>
+	<p>9월</p>
+	<p>10월</p>
+	<p>11월</p>
+	<p>12월</p>
+	<br />
+	<br />
+
+	<div>
+		<ul class="first">
+			<li>사과</li>
+			<li>바나나</li>
+			<li>딸기</li>
+			<li>메론</li>
+		</ul>
+	</div>
+
+	<div>
+		<ul class="second">
+			<li>짜장면</li>
+			<li>우동</li>
+			<li>짬뽕</li>
+			<li>탕수육</li>
+		</ul>
+	</div>
+
+	<div>
+		<ul class="third">
+			<li>커피</li>
+			<li>콜라</li>
+			<li>사이다</li>
+			<li>환타</li>
+			<li>우유</li>
+		</ul>
+	</div>
+</body>
+</html>

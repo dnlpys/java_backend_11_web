@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동생, 모든동생</title>
+    <style>
+       	div{
+			background-color:#EEEEEE;
+			padding:10px;
+			width:500px;
+		}
+    </style>
+    <!--     <script src="./jquery.js"></script> -->
+<!--     <script src="jquery-3.6.4.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+	$(function() {
+		console.log('onload....');
+		
+		//text-일반텍스트,get,set
+		$('#top').text('Hello World');
+		let top = $('#top').text();
+		console.log('top:',top);
+		
+		
+		//html-html tag ,get,set
+		$('#top').html('<h1>top content</h1>');
+		top = $('#top').html();
+		console.log('top:',top);
+		
+		
+		//val-input value ,get,set
+		$('#name').val('lee');
+		let name = $('#name').val();
+		console.log('name:',name);
+
+		//attr- attribute ,get,set
+		let id_attr = $('#middle').attr('id');
+		console.log('id_attr:',id_attr);
+		
+		$('#middle').attr('title','Hello');
+		
+	});
+</script>
+</head>
+<body>
+	<div id="top">
+		<h1>top content</h1>
+	</div>
+	
+	<div id="middle">
+	    <form action="#" method="post">
+			<label>이름</label>
+			<input type="text" id="name" name="name" value="kim"/>
+			<input type="text" id="addr" name="addr" value="seoul"/>
+			<br/><br/>
+			
+			<b>반드시 입력하세요.</b>
+			<br/><br/>
+			
+			<fieldset> 									 		 	
+				<legend>필수입력사항</legend>  			 
+				<label>아이디</label>
+				<input type="text" name="id"/>
+				<label>비밀번호</label>
+				<input type="password" name="password"/>
+				<input type="password" name="password"/>
+			</fieldset>
+			<br/>
+			
+			<label>
+				 E-MAIL 
+				<input type="text" name="email"/>
+			</label>
+		</form>
+	</div>
+</body>
+</html>

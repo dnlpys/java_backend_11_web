@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자식, 후손</title>
+<style>
+label {
+	font-size: 20px;
+	background-color: #EEEEEE;
+	padding: 10px;
+}
+</style>
+<!--     <script src="./jquery.js"></script> -->
+<!--     <script src="jquery-3.6.4.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+	$(function() {
+		//p 하위의 모든 label
+// 		$("p label").css({
+// 			background : '#ffff00'
+// 		});
+		
+		//p 의 바로아래 자식엘리먼트들만..
+		$("p > label").css({
+			background : '#ffff00'
+		});
+
+
+	});
+</script>
+</head>
+<body>
+	<p>
+		<label>ONE</label> 
+		<label>TWO</label> 
+		<span> 
+			<label>THREE</label>
+		</span>
+	</p>
+</body>
+</html>

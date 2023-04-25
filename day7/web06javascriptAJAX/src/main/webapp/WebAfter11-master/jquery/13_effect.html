@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이벤트</title>
+<!--     <script src="./jquery.js"></script> -->
+<!--     <script src="jquery-3.6.4.min.js"></script> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+	$(function() {
+		console.log('onload....');
+		
+		$('#h01').mouseover(function(){
+			console.log('mouseover...');
+			$('#h04').hide();
+			$('#h02').fadeOut(3000);
+		});
+		$('#h01').mouseout(function(){
+			console.log('mouseout...');
+			$('#h04').show();
+			$('#h02').fadeIn(3000);
+		});
+		
+		
+		
+	
+	});
+</script>
+
+</head>
+<body>
+	<h1 id="h01">event1 mouse over & out</h1>
+	<h1 id="h02">event2 </h1>
+	<h1 id="h03">event3 </h1>
+	<h1 id="h04">event4 </h1>
+	
+	<form action="#">
+		<input type="text" value="aaa">
+		<input type="text" value="bbb">
+		<input type="checkbox" value="ccc">ccc
+	</form>
+	
+</body>
+</html>
