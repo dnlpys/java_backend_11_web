@@ -11,3 +11,12 @@
 <a href="json_selectAll.do">json_selectAll.do</a>
 <a href="json_selectOne.do?num=47">json_selectOne.do?num=47</a>
 <hr>
+<script type="text/javascript">
+	if('${user_id}'===''){
+		$('#login').show();
+		$('#logout').hide();
+	}else{
+		$('#login').hide();
+		$('#logout').show();
+	}
+</script>
