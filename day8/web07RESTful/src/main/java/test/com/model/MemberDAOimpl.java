@@ -393,4 +393,59 @@ public class MemberDAOimpl implements MemberDAO {
 		return vo2;
 	}
 
+	@Override
+	public MemberVO login(MemberVO vo) {
+		System.out.println("login()..."+vo);
+		
+		MemberVO vo2 = null;
+		
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_member.LOGIN);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPw());
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo2 = new MemberVO();
+				vo2.setId(rs.getString("id"));
+				vo2.setPw(rs.getString("pw"));
+				vo2.setName(rs.getString("name"));
+				vo2.setTel(rs.getString("tel"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		
+		
+		return vo2;
+	}
+
 }

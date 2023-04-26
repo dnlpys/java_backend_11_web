@@ -10,7 +10,8 @@
 	<h1>index.jsp</h1>
 	<jsp:include page="top_menu.jsp"></jsp:include>
 	
-
+	<h1>${user_id}</h1>
+	<h1>${user_name}</h1>
 	
 </body>
 </html>

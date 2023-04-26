@@ -9,6 +9,8 @@ public interface OracleSQL_member {
 	
 	String ID_CHECK = "select * from member where id = ?";
 	
+	String LOGIN = "select * from member where id = ? and pw = ?";
+	
 	String SEARCH_LIST_NAME = "select * from member where name like ?";
 	
 	String SEARCH_LIST_TEL =  "select * from member where tel  like ?";

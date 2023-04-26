@@ -18,4 +18,6 @@ public interface MemberDAO {
 
 	public MemberVO idCheck(MemberVO vo);
 
+	public MemberVO login(MemberVO vo);
+
 }

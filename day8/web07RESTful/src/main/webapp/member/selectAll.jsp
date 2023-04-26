@@ -8,9 +8,9 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
-	window.onload = function(){
-		console.log('selectAll()....');
-		//1.javascript ajax
+//1.javascript ajax
+// 	window.onload = function(){
+// 		console.log('selectAll()....');
 // 		const xhttp = new XMLHttpRequest();
 // 		xhttp.onload = function() {
 // // 			console.log(this.responseText);//JSON.parse>> loop>> display
@@ -37,8 +37,10 @@
 // 		};
 // 		xhttp.open("GET", "json_selectAll.do");
 // 		xhttp.send();
-
-		//2.jquery ajax
+// 	};//end selectAll
+	
+	//2.jquery ajax
+	$(function(){
 		$.ajax({
 			url : "json_selectAll.do",
 // 			data:{},
@@ -89,14 +91,13 @@
 // 				console.log('error:', error);
 			}
 		});
-
-
-	};//end selectAll
+	});
 </script>
 </head>
 <body>
-	<h1>회원목록</h1>
+	<h1>회원목록 ${user_id} ${user_name}</h1>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
+	
 	<form action="searchList.do" method="get">
 		<select name="searchKey">
 			<option value="name">name</option>

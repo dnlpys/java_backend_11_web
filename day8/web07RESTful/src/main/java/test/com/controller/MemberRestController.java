@@ -46,6 +46,8 @@ public class MemberRestController extends HttpServlet {
 
 		String sPath = request.getServletPath();
 		System.out.println(sPath);
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
 
 		if (sPath.equals("/json_idCheck.do")) {
 

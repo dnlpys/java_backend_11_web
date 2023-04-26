@@ -18,7 +18,7 @@ import test.com.model.MemberVO;
 @WebServlet({ "/index.do", "/insert.do","/update.do", 
 	"/selectAll.do", "/selectOne.do" ,
 	"/insertOK.do","/updateOK.do","/deleteOK.do",
-	"/searchList.do"})
+	"/searchList.do","/login.do","/loginOK.do","/logout.do"})
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberDAO dao =  new MemberDAOimpl();   
@@ -49,27 +49,19 @@ public class MemberController extends HttpServlet {
 			request.getRequestDispatcher("member/insert.jsp").forward(request, response);
 		}else if(sPath.equals("/update.do")) {
 			
-			String num = request.getParameter("num")==null?"0":request.getParameter("num");
-			System.out.println("param.num:"+num);
-			
-			MemberVO vo = new MemberVO();
-			vo.setNum(Integer.parseInt(num));
-			
-			MemberVO vo2 = dao.selectOne(vo);
-			
-			
-			request.setAttribute("vo2", vo2);
-			
-			
 			request.getRequestDispatcher("member/update.jsp").forward(request, response);
 		}else if(sPath.equals("/selectAll.do")) {
 			
-			List<MemberVO> vos = dao.selectAll();
-			System.out.println(vos);
-			
-			request.setAttribute("vos", vos);
-			
-			request.getRequestDispatcher("member/selectAll.jsp").forward(request, response);
+			String user_id = (String)request.getSession().getAttribute("user_id");
+			System.out.println("session user_id:"+user_id);
+			if(user_id != null) {
+				List<MemberVO> vos = dao.selectAll();
+				System.out.println(vos);
+				request.setAttribute("vos", vos);
+				request.getRequestDispatcher("member/selectAll.jsp").forward(request, response);
+			}else {
+				response.sendRedirect("login.do");
+			}
 		}else if(sPath.equals("/searchList.do")) {
 			
 			String searchKey = request.getParameter("searchKey");
@@ -167,8 +159,39 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("selectAll.do");
 			else
 				response.sendRedirect("selectOne.do?num="+num);
+		}else if(sPath.equals("/login.do")) {
+			request.getRequestDispatcher("member/login.jsp").forward(request, response);
+		}else if(sPath.equals("/loginOK.do")) {
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			
+			
+			System.out.println("param.id:"+id);
+			System.out.println("param.pw:"+pw);
+			
+			MemberVO vo = new MemberVO();
+			
+			vo.setId(id);
+			vo.setPw(pw);
+			
+			MemberVO vo2 = dao.login(vo);//id,pw 존재유무,존재한다면 뭘얻어올것인가?이름이 필요하다.
+			
+			System.out.println("vo2:"+vo2);
+			if(vo2==null)	
+				response.sendRedirect("login.do");
+			else {
+				request.getSession().setAttribute("user_id", vo2.getId());
+				request.getSession().setAttribute("user_name", vo2.getName());
+				request.getSession().setMaxInactiveInterval(1*60); //1분
+				response.sendRedirect("index.do");
+			}
+				
+		}else if(sPath.equals("/logout.do")) {
+			request.getSession().removeAttribute("user_id");
+			request.getSession().removeAttribute("user_name");
+			response.sendRedirect("index.do");
 		}
-		
 		
 	}//end doGet
 
