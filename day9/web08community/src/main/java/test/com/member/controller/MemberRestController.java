@@ -20,7 +20,8 @@ import test.com.member.model.MemberVO;
 /**
  * Servlet implementation class MemberController
  */
-@WebServlet({ "/json_idCheck.do", "/json_selectAll.do" ,"/json_selectOne.do"})
+@WebServlet({ "/json_idCheck.do", "/json_selectAll.do" ,
+	"/json_selectOne.do","/json_searchList.do"})
 public class MemberRestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberDAO dao = new MemberDAOimpl();
@@ -40,8 +41,6 @@ public class MemberRestController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("doGet()....");
-
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String sPath = request.getServletPath();
 		System.out.println(sPath);
@@ -76,18 +75,6 @@ public class MemberRestController extends HttpServlet {
 			List<MemberVO> vos = dao.selectAll();
 			System.out.println(vos);
 			
-//			String rows = "[";
-//			
-//			for (int i = 0; i < vos.size(); i++) {
-//				MemberVO vo = vos.get(i);
-//				rows += "{\"num\":"+vo.getNum()+
-//						",\"id\":\""+vo.getId()+
-//						"\",\"pw\":\""+vo.getPw()+
-//						"\",\"name\":\""+vo.getName()+
-//						"\",\"tel\":\""+vo.getTel()+"\"}";
-//				if(i<vos.size()-1)rows +=",";
-//			}
-//			rows += "]";
 			String rows = new Gson().toJson(vos);
 			
 			response.setContentType("text/html; charset=UTF-8");
@@ -104,17 +91,24 @@ public class MemberRestController extends HttpServlet {
 			
 			System.out.println(vo2);
 			
-//			String row = "{\"num\":"+vo2.getNum()+
-//					",\"id\":\""+vo2.getId()+
-//					"\",\"pw\":\""+vo2.getPw()+
-//					"\",\"name\":\""+vo2.getName()+
-//					"\",\"tel\":\""+vo2.getTel()+"\"}";
-			
 			String row = new Gson().toJson(vo2);
-			
 			
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().append(row);
+		}else if (sPath.equals("/json_searchList.do")) {
+
+			String searchKey = request.getParameter("searchKey");
+			String searchWord = request.getParameter("searchWord");
+			System.out.println("param.searchKey : "+searchKey);
+			System.out.println("param.searchWord : "+searchWord);
+			
+			List<MemberVO> vos = dao.searchList(searchKey,searchWord);
+			System.out.println(vos);
+			
+			String rows = new Gson().toJson(vos);
+			
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().append(rows);
 		}
 
 	}// end doGet

@@ -15,10 +15,10 @@ import test.com.member.model.MemberVO;
 /**
  * Servlet implementation class MemberController
  */
-@WebServlet({ "/index.do", "/insert.do","/update.do", 
-	"/selectAll.do", "/selectOne.do" ,
-	"/insertOK.do","/updateOK.do","/deleteOK.do",
-	"/searchList.do","/login.do","/loginOK.do","/logout.do"})
+@WebServlet({  "/m_insert.do","/m_update.do", 
+	"/m_selectAll.do", "/m_selectOne.do" ,
+	"/m_insertOK.do","/m_updateOK.do","/m_deleteOK.do",
+	"/m_searchList.do","/login.do","/loginOK.do","/logout.do"})
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberDAO dao =  new MemberDAOimpl();   
@@ -43,21 +43,12 @@ public class MemberController extends HttpServlet {
 		String sPath = request.getServletPath();
 		System.out.println(sPath);
 		
-		if(sPath.equals("/index.do")) {
-			if(request.getCookies()!=null) {
-				for (Cookie c : request.getCookies()) {
-//					System.out.println(request.getCookies().clone()[0].getValue());
-					System.out.println(c.getValue());
-				}
-			}
-			
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}else if(sPath.equals("/insert.do")) {
+		if(sPath.equals("/m_insert.do")) {
 			request.getRequestDispatcher("member/insert.jsp").forward(request, response);
-		}else if(sPath.equals("/update.do")) {
+		}else if(sPath.equals("/m_update.do")) {
 			
 			request.getRequestDispatcher("member/update.jsp").forward(request, response);
-		}else if(sPath.equals("/selectAll.do")) {
+		}else if(sPath.equals("/m_selectAll.do")) {
 			
 			String user_id = (String)request.getSession().getAttribute("user_id");
 			System.out.println("session user_id:"+user_id);
@@ -69,7 +60,7 @@ public class MemberController extends HttpServlet {
 			}else {
 				response.sendRedirect("login.do");
 			}
-		}else if(sPath.equals("/searchList.do")) {
+		}else if(sPath.equals("/m_searchList.do")) {
 			
 			String searchKey = request.getParameter("searchKey");
 			String searchWord = request.getParameter("searchWord");
@@ -84,7 +75,7 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("vos", vos);
 			
 			request.getRequestDispatcher("member/selectAll.jsp").forward(request, response);
-		}else if(sPath.equals("/selectOne.do")) {
+		}else if(sPath.equals("/m_selectOne.do")) {
 			
 			String num = request.getParameter("num")==null?"0":request.getParameter("num");
 			System.out.println("param.num:"+num);
@@ -100,7 +91,7 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("vo2", vo2);
 			
 			request.getRequestDispatcher("member/selectOne.jsp").forward(request, response);
-		}else if(sPath.equals("/insertOK.do")) {
+		}else if(sPath.equals("/m_insertOK.do")) {
 			
 			
 			String id = request.getParameter("id");
@@ -124,11 +115,11 @@ public class MemberController extends HttpServlet {
 			int result = dao.insert(vo);
 			System.out.println("result:"+result);
 			if(result==1)	
-				response.sendRedirect("selectAll.do");
+				response.sendRedirect("m_selectAll.do");
 			else
 				response.sendRedirect("index.do");
 				
-		}else if(sPath.equals("/updateOK.do")) {
+		}else if(sPath.equals("/m_updateOK.do")) {
 			String num = request.getParameter("num")==null?"0":request.getParameter("num");
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
@@ -148,11 +139,11 @@ public class MemberController extends HttpServlet {
 			int result = dao.update(vo);
 			System.out.println("result:"+result);
 			if(result==1)	
-				response.sendRedirect("selectOne.do?num="+num);
+				response.sendRedirect("m_selectOne.do?num="+num);
 			else
 				response.sendRedirect("update.do?num="+num);
 			
-		}else if(sPath.equals("/deleteOK.do")) {
+		}else if(sPath.equals("/m_deleteOK.do")) {
 			
 			String num = request.getParameter("num")==null?"0":request.getParameter("num");
 			System.out.println("param.num:"+num);
@@ -163,9 +154,9 @@ public class MemberController extends HttpServlet {
 			int result = dao.delete(vo);
 			System.out.println("result:"+result);
 			if(result==1)
-				response.sendRedirect("selectAll.do");
+				response.sendRedirect("m_selectAll.do");
 			else
-				response.sendRedirect("selectOne.do?num="+num);
+				response.sendRedirect("m_selectOne.do?num="+num);
 		}else if(sPath.equals("/login.do")) {
 			request.getRequestDispatcher("member/login.jsp").forward(request, response);
 		}else if(sPath.equals("/loginOK.do")) {

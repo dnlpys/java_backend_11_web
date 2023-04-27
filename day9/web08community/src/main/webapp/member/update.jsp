@@ -38,7 +38,7 @@ $(function(){
 	<h1>update.jsp</h1>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 
-	<form action="updateOK.do" method="post">
+	<form action="m_updateOK.do" method="post">
 		<table>
 			<tr>
 				<td><label for="num">num:</label></td>
@@ -51,7 +51,7 @@ $(function(){
 			</tr>
 			<tr>
 				<td><label for="pw">pw:</label></td>
-				<td><input type="password" id="pw" name="pw" value="" readonly></td>
+				<td><input type="password" id="pw" name="pw" value="" ></td>
 			</tr>
 			<tr>
 				<td><label for="name">name:</label></td>

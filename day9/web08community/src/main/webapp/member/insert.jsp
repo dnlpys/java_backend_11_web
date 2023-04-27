@@ -59,7 +59,7 @@
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 
 
-	<form action="insertOK.do" method="post">
+	<form action="m_insertOK.do" method="post">
 		<table>
 			<tr>
 				<td><label for="id">id:</label></td>
