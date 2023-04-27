@@ -181,7 +181,7 @@ public class MemberController extends HttpServlet {
 			else {
 				request.getSession().setAttribute("user_id", vo2.getId());
 				request.getSession().setAttribute("user_name", vo2.getName());
-				request.getSession().setMaxInactiveInterval(1*60); //1분
+				request.getSession().setMaxInactiveInterval(5*60); //1분*5
 				
 				Cookie cookie = new Cookie("user_name", vo2.getName());
 				cookie.setMaxAge(10);//10초후 쿠키삭제

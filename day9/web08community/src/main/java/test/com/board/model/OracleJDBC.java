@@ -1,4 +1,4 @@
-package test.com.member.model;
+package test.com.board.model;
 
 public interface OracleJDBC {
 
