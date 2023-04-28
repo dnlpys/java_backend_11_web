@@ -9,6 +9,15 @@ public class ReservationVO {
 	private Timestamp regdate;
 	private String movie_date;
 	private int mcount;
+	private String title;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public int getNum() {
 		return num;
@@ -61,7 +70,7 @@ public class ReservationVO {
 	@Override
 	public String toString() {
 		return "ReservationVO [num=" + num + ", user_id=" + user_id + ", movie_num=" + movie_num + ", regdate="
-				+ regdate + ", movie_date=" + movie_date + ", mcount=" + mcount + "]";
+				+ regdate + ", movie_date=" + movie_date + ", mcount=" + mcount + ", title=" + title + "]";
 	}
 
 }

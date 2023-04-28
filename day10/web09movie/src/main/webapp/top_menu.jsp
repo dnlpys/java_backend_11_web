@@ -10,7 +10,7 @@
 <a href="b_selectAll.do" id="b_selectAll">글목록</a>
 
 <a href="re_insert.do" id="re_insert">영화예매</a>
-<a href="re_selectAll.do" id="re_selectAll">예매목록</a>
+<a href="re_selectAll.do?user_id=${user_id}" id="re_selectAll">예매목록</a>
 
 <a href="login.do" id="login">로그인</a>
 <a href="logout.do" id="logout">로그아웃</a>

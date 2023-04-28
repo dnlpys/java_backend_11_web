@@ -16,7 +16,7 @@ public class MovieDAOimpl implements MovieDAO {
 	private ResultSet rs;
 
 	public MovieDAOimpl() {
-		System.out.println("BoardDAOimpl()....");
+		System.out.println("MovieDAOimpl()....");
 		try {
 			Class.forName(OracleJDBC.DRIVER_NAME);
 			System.out.println("driver successed...");
