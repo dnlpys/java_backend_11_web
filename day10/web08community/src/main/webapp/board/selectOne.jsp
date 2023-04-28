@@ -28,6 +28,13 @@
 // 					console.log(vo);
 					let tag_td = `<td>\${vo.content}</td>`;
 					if(cnum==vo.cnum) tag_td = `<td><input type="text" value="수정글" id="input_content"><button onclick="updateOK(\${vo.cnum})">수정완료</button></td>`;
+					let tag_div = ``;
+					if('${user_id}'===vo.writer){
+						tag_div = `<div>
+							<button onclick="deleteOK(\${vo.cnum})">댓글삭제</button>
+							<button onclick="selectAll(\${vo.cnum})">댓글수정</button>
+						</div>`;
+					}
 					tag_txt += `
 						<tr>
 							<td>댓글번호</td>
@@ -42,14 +49,14 @@
 							<td>\${vo.writer}</td>
 							<td>\${vo.wdate}</td>
 							<td>
-								<button onclick="deleteOK(\${vo.cnum})">댓글삭제</button>
-								<button onclick="selectAll(\${vo.cnum})">댓글수정</button>
+								\${tag_div}
 							</td>
 						</tr>
 					`;
 				});
 				
 				$('#comm_list').html(tag_txt);
+				
 			},
 			error:function(xhr,status,error){
 				console.log('xhr.status:', xhr.status);

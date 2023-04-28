@@ -30,7 +30,7 @@
 	 					<td>\${vo.price}</td>
 	 					<td>\${vo.producer}</td>
 	 					<td>				
- 						<a href="re_selectOne.do?num=\${vo.num}">예약하기</a>
+ 						<a href="re_insertDetail.do?num=\${vo.num}">예약하기</a>
  					</td>
 	 				</tr>
 	 				`;

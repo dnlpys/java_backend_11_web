@@ -75,7 +75,44 @@ public class CommentsDAOimpl implements CommentsDAO {
 	public int update(CommentsVO vo) {
 		System.out.println("update()..."+vo);
 		
-		return 0;
+		int flag = 0;
+		try {
+			conn = DriverManager.getConnection(
+					OracleJDBC.URL,OracleJDBC.USER,OracleJDBC.PASSWORD);
+			System.out.println("conn successed......");
+			
+			pstmt = conn.prepareStatement(OracleSQL_comments.UPDATE);
+			pstmt.setString(1, vo.getContent());
+			pstmt.setInt(2, vo.getCnum());
+			
+			flag = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn!=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}//end finally
+		return flag;
 	}
 
 	@Override
