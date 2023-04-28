@@ -83,9 +83,50 @@ public class CommentsController extends HttpServlet {
 			
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().append(rows);
+		}else if(sPath.equals("/c_deleteOK.do")) {
+			String cnum = request.getParameter("cnum")==null?"0":request.getParameter("cnum");
+			System.out.println("param.cnum:"+cnum);
+			
+			CommentsVO vo = new CommentsVO();
+			vo.setCnum(Integer.parseInt(cnum));
+			
+			int result = dao.delete(vo);
+			System.out.println("result:"+result);
+			
+			String msg = "";
+			if(result==1) {
+				msg = "{\"result\":1}"; //{"result":1}
+			}else {
+				msg = "{\"result\":0}"; //{"result":0}
+			}
+			
+			response.getWriter().append(msg);
+			
+		}else if(sPath.equals("/c_updateOK.do")) {
+			String cnum = request.getParameter("cnum")==null?"0":request.getParameter("cnum");
+			String content = request.getParameter("content");
+			System.out.println("param.cnum:"+cnum);
+			System.out.println("param.content:"+content);
+			
+			CommentsVO vo = new CommentsVO();
+			vo.setCnum(Integer.parseInt(cnum));
+			vo.setContent(content);
+			
+			int result = dao.update(vo);
+			System.out.println("result:"+result);
+			
+			String msg = "";
+			if(result==1) {
+				msg = "{\"result\":1}"; //{"result":1}
+			}else {
+				msg = "{\"result\":0}"; //{"result":0}
+			}
+			
+			response.getWriter().append(msg);
+			
 		}
 		
-	}
+	}//end doGet...
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

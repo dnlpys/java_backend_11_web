@@ -10,8 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-	function selectAll(){
-		console.log('selectAll()....');
+	function selectAll(cnum=0){
+		console.log('selectAll()....cnum:',cnum);
 		$.ajax({
 			url : "c_selectAll.do",
 			data:{
@@ -25,17 +25,26 @@
 				let tag_txt = '';
 				
 				$.each(vos,function(index,vo){
-					console.log(vo);
+// 					console.log(vo);
+					let tag_td = `<td>\${vo.content}</td>`;
+					if(cnum==vo.cnum) tag_td = `<td><input type="text" value="수정글" id="input_content"><button onclick="updateOK(\${vo.cnum})">수정완료</button></td>`;
 					tag_txt += `
 						<tr>
+							<td>댓글번호</td>
 							<td>내용</td>
 							<td>작성자</td>
 							<td>작성일자</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td>\${vo.content}</td>
+							<td>\${vo.cnum}</td>
+							\${tag_td}
 							<td>\${vo.writer}</td>
 							<td>\${vo.wdate}</td>
+							<td>
+								<button onclick="deleteOK(\${vo.cnum})">댓글삭제</button>
+								<button onclick="selectAll(\${vo.cnum})">댓글수정</button>
+							</td>
 						</tr>
 					`;
 				});
@@ -72,17 +81,51 @@
 		
 	}//end insertOK
 	
-	function updateOK(){
-		console.log('updateOK()....');
+	function updateOK(cnum=0){
+		console.log('updateOK()....',cnum);
+		console.log($('#input_content').val());
 		
+		$.ajax({
+			url : "c_updateOK.do",
+			data:{
+				cnum:cnum,
+				content:$('#input_content').val()
+			},
+			method:'GET',//default get
+// 			method:'POST',
+			dataType:'json', //xml,text
+			success : function(obj) {
+				console.log('ajax...success:', obj);//{"result":1}
+				if(obj.result==1) selectAll();
+			},
+			error:function(xhr,status,error){
+				console.log('xhr.status:', xhr.status);
+			}
+		});
 		
 	}//end updateOK
 	
-	function deleteOK(){
-		console.log('deleteOK()....');
+	function deleteOK(cnum=0){
+		console.log('deleteOK()....',cnum);
 		
+		$.ajax({
+			url : "c_deleteOK.do",
+			data:{
+				cnum:cnum
+			},
+			method:'GET',//default get
+// 			method:'POST',
+			dataType:'json', //xml,text
+			success : function(obj) {
+				console.log('ajax...success:', obj);//{"result":1}
+				if(obj.result==1) selectAll();
+			},
+			error:function(xhr,status,error){
+				console.log('xhr.status:', xhr.status);
+			}
+		});
 		
-	}//end updateOK
+	}//end deleteOK
 
 </script>
 </head>
@@ -130,10 +173,6 @@
 	<table border="1">
 		<tr>
 			<td>댓글</td>
-			<td>내용</td>
-		</tr>
-		<tr>
-			<td></td>
 			<td><input type="text" id="comm_content" value="댓글입니다."></td>
 		</tr>
 		<tr>
