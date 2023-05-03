@@ -39,7 +39,7 @@ public class MemberController {
 		return "member/insert";
 	}//end m_insert
 	
-	@RequestMapping(value = "/m_insertOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/m_insertOK.do", method = RequestMethod.POST)
 	public String m_insertOK(MemberVO vo) {
 		logger.info("/m_insertOK.do...{}",vo);
 		
@@ -142,7 +142,7 @@ public class MemberController {
 		return "member/login";
 	}//end login
 	
-	@RequestMapping(value = "/loginOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginOK.do", method = RequestMethod.POST)
 	public String loginOK(MemberVO vo) {
 		logger.info("/loginOK.do...{}",vo);
 		
