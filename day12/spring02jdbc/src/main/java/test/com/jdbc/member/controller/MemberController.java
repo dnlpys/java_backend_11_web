@@ -40,32 +40,56 @@ public class MemberController {
 	}//end m_insert
 	
 	@RequestMapping(value = "/m_insertOK.do", method = RequestMethod.GET)
-	public String m_insertOK() {
-		logger.info("/m_insertOK.do");
+	public String m_insertOK(MemberVO vo) {
+		logger.info("/m_insertOK.do...{}",vo);
 		
-		return "redirect:m_selectAll.do";
+		int result = service.insert(vo);
+		logger.info("result : {}",result);
+		if(result==1) {
+			return "redirect:m_selectAll.do";
+		}else {
+			return "redirect:m_insert.do";
+		}
+		
 	}//end m_insertOK
 	
 	@RequestMapping(value = "/m_update.do", method = RequestMethod.GET)
-	public String m_update() {
-		logger.info("/m_update.do");
+	public String m_update(MemberVO vo) {
+		logger.info("/m_update.do...vo:{}",vo);
+		
+		MemberVO vo2 = service.selectOne(vo);
+		logger.info(vo2.toString());
 		
 		return "member/update";
 	}//end m_update
 	
 	@RequestMapping(value = "/m_updateOK.do", method = RequestMethod.GET)
-	public String m_updateOK() {
-		logger.info("/m_updateOK.do");
+	public String m_updateOK(MemberVO vo) {
+		logger.info("/m_updateOK.do...{}",vo);
 		
-		return "redirect:m_selectOne.do";
+		int result = service.update(vo);
+		logger.info("result : {}",result);
+		if(result==1) {
+			return "redirect:m_selectOne.do?num="+vo.getNum();
+		}else {
+			return "redirect:m_update.do"+vo.getNum();
+		}
+		
 	}//end m_updateOK
 	
 	@RequestMapping(value = "/m_deleteOK.do", method = RequestMethod.GET)
-	public String m_deleteOK() {
-		logger.info("/m_deleteOK.do");
+	public String m_deleteOK(MemberVO vo) {
+		logger.info("/m_deleteOK.do....{}",vo);
 		
-		return "redirect:m_selectAll.do";
-	}//end b_deleteOK
+		int result = service.delete(vo);
+		logger.info("result : {}",result);
+		if(result==1) {
+			return "redirect:m_selectAll.do";
+		}else {
+			return "redirect:m_selectOne.do?num="+vo.getNum();
+		}
+		
+	}//end m_deleteOK
 	
 	@RequestMapping(value = "/m_selectAll.do", method = RequestMethod.GET)
 	public String m_selectAll() {
@@ -85,7 +109,10 @@ public class MemberController {
 		logger.info("searchKey : {}",searchKey);
 		logger.info("searchWord : {}",searchWord);
 		
-		
+		List<MemberVO> vos = service.searchList(searchKey,searchWord);
+		for (MemberVO x : vos) {
+			logger.info(x.toString());
+		}
 		
 		return "member/selectAll";
 	}//end m_searchList
