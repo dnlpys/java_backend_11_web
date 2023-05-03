@@ -12,7 +12,7 @@
 	
 	<li><a href="m_selectAll.do">회원목록</a></li>
 	<li><a href="m_searchList.do">회원검색</a></li>
-	<li><a href="m_selectOne.do">회원정보</a></li>
+	<li><a href="m_selectOne.do?num=4">회원정보</a></li>
 	
 	<li><a href="b_insert.do">글쓰기</a></li>
 	<li><a href="b_insertOK.do">글작성완료</a></li>

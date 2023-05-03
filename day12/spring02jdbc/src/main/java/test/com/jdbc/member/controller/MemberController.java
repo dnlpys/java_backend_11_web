@@ -2,14 +2,21 @@ package test.com.jdbc.member.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import test.com.jdbc.member.model.MemberDAO;
+import test.com.jdbc.member.model.MemberDAOimpl;
+import test.com.jdbc.member.model.MemberVO;
+import test.com.jdbc.member.service.MemberService;
 
 /**
  * Handles requests for the application home page.
@@ -18,7 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-//	MemberDAO dao = new MemberDAOimpl();
+	
+	//DI-Dependency Injection : IoC(Inversion of Controller)
+	@Autowired
+	MemberService service;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -61,19 +71,31 @@ public class MemberController {
 	public String m_selectAll() {
 		logger.info("/m_selectAll.do");
 		
+		List<MemberVO> vos = service.selectAll();
+		for (MemberVO x : vos) {
+			logger.info(x.toString());
+		}
+		
 		return "member/selectAll";
 	}//end m_selectAll
 	
 	@RequestMapping(value = "/m_searchList.do", method = RequestMethod.GET)
-	public String m_searchList() {
+	public String m_searchList(String searchKey,String searchWord) {
 		logger.info("/m_searchList.do");
+		logger.info("searchKey : {}",searchKey);
+		logger.info("searchWord : {}",searchWord);
+		
+		
 		
 		return "member/selectAll";
 	}//end m_searchList
 	
 	@RequestMapping(value = "/m_selectOne.do", method = RequestMethod.GET)
-	public String m_selectOne() {
-		logger.info("/m_selectOne.do");
+	public String m_selectOne(MemberVO vo) {
+		logger.info("/m_selectOne.do...vo:{}",vo);
+		
+		MemberVO vo2 = service.selectOne(vo);
+		logger.info(vo2.toString());
 		
 		return "member/selectOne";
 	}//end m_selectOne
