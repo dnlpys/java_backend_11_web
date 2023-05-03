@@ -47,6 +47,10 @@ public class MemberService {
 	public int delete(MemberVO vo) {
 		return dao.delete(vo);
 	}
+
+	public MemberVO login(MemberVO vo) {
+		return dao.login(vo);
+	}
 	
 	
 	

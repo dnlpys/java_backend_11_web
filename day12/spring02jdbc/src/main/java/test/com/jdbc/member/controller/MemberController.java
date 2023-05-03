@@ -54,16 +54,18 @@ public class MemberController {
 	}//end m_insertOK
 	
 	@RequestMapping(value = "/m_update.do", method = RequestMethod.GET)
-	public String m_update(MemberVO vo) {
+	public String m_update(MemberVO vo,Model model) {
 		logger.info("/m_update.do...vo:{}",vo);
 		
 		MemberVO vo2 = service.selectOne(vo);
 		logger.info(vo2.toString());
 		
+		model.addAttribute("vo2", vo2);
+		
 		return "member/update";
 	}//end m_update
 	
-	@RequestMapping(value = "/m_updateOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/m_updateOK.do", method = RequestMethod.POST)
 	public String m_updateOK(MemberVO vo) {
 		logger.info("/m_updateOK.do...{}",vo);
 		
@@ -92,7 +94,7 @@ public class MemberController {
 	}//end m_deleteOK
 	
 	@RequestMapping(value = "/m_selectAll.do", method = RequestMethod.GET)
-	public String m_selectAll() {
+	public String m_selectAll(Model model) {
 		logger.info("/m_selectAll.do");
 		
 		List<MemberVO> vos = service.selectAll();
@@ -100,11 +102,13 @@ public class MemberController {
 			logger.info(x.toString());
 		}
 		
+		model.addAttribute("vos", vos);
+		
 		return "member/selectAll";
 	}//end m_selectAll
 	
 	@RequestMapping(value = "/m_searchList.do", method = RequestMethod.GET)
-	public String m_searchList(String searchKey,String searchWord) {
+	public String m_searchList(String searchKey,String searchWord,Model model) {
 		logger.info("/m_searchList.do");
 		logger.info("searchKey : {}",searchKey);
 		logger.info("searchWord : {}",searchWord);
@@ -114,15 +118,19 @@ public class MemberController {
 			logger.info(x.toString());
 		}
 		
+		model.addAttribute("vos", vos);
+		
 		return "member/selectAll";
 	}//end m_searchList
 	
 	@RequestMapping(value = "/m_selectOne.do", method = RequestMethod.GET)
-	public String m_selectOne(MemberVO vo) {
+	public String m_selectOne(MemberVO vo,Model model) {
 		logger.info("/m_selectOne.do...vo:{}",vo);
 		
 		MemberVO vo2 = service.selectOne(vo);
 		logger.info(vo2.toString());
+		
+		model.addAttribute("vo2", vo2);
 		
 		return "member/selectOne";
 	}//end m_selectOne
@@ -133,6 +141,20 @@ public class MemberController {
 		
 		return "member/login";
 	}//end login
+	
+	@RequestMapping(value = "/loginOK.do", method = RequestMethod.GET)
+	public String loginOK(MemberVO vo) {
+		logger.info("/loginOK.do...{}",vo);
+		
+		MemberVO vo2 = service.login(vo);
+		
+		if(vo2 == null) {
+			return "redirect:login.do";
+		}else {
+			return "redirect:home.do";
+		}
+		
+	}//end loginOK
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout() {
