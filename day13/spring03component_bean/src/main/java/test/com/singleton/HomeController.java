@@ -17,6 +17,8 @@ import test.com.singleton.bean.TestBean2;
 import test.com.singleton.bean.TestBean3;
 import test.com.singleton.bean.TestBean4;
 import test.com.singleton.bean.TestBean5;
+import test.com.singleton.bean.TestBean6;
+import test.com.singleton.bean.TestBean7;
 import test.com.singleton.component.TestComponent;
 
 /**
@@ -50,6 +52,16 @@ public class HomeController {
 	
 	@Autowired
 	TestBean5 test05;
+	
+	@Autowired
+	TestBean6 test0601;
+	
+	@Autowired
+	TestBean6 test0602;
+	
+	@Autowired
+	TestBean7 test07;
+	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -85,6 +97,12 @@ public class HomeController {
 		logger.info("{}",test04);
 
 		logger.info("{}",test05);
+		
+		logger.info("{}",test0601);
+		logger.info("{}",test0602);
+		
+		logger.info("{}",test07);
+		
 		
 		
 		return "home";
