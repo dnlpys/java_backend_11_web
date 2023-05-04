@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="test05" class="test.com.singleton.bean.TestBean5">
+		<property name="list">
+			<list>
+				<value>aaa1</value>
+				<value>aaa1</value>
+				<value>aaa1</value>
+				<value>aaa1</value>
+			</list>
+		</property>
+		<property name="set">
+			<set>
+				<value>bbb1</value>
+				<value>bbb1</value>
+				<value>bbb1</value>
+				<value>bbb1</value>
+			</set>
+		</property>
+		<property name="map">
+			<map>
+				<entry key="num">
+					<value>1</value>
+				</entry>
+				<entry key="name">
+					<value>kim</value>
+				</entry>
+				<entry key="age">
+					<value>33</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+</beans>
