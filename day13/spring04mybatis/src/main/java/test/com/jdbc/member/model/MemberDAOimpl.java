@@ -16,7 +16,7 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Autowired
 	SqlSession sqlSession;
-	
+
 	public MemberDAOimpl() {
 		logger.info("MemberDAOimpl()...");
 	}
@@ -24,7 +24,7 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public int insert(MemberVO vo) {
 		logger.info("insert()..." + vo);
-		int flag = 0;
+		int flag = sqlSession.insert("INSERT", vo);
 
 		return flag;
 	}
@@ -32,7 +32,7 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public int update(MemberVO vo) {
 		logger.info("update()..." + vo);
-		int flag = 0;
+		int flag = sqlSession.update("UPDATE", vo);
 
 		return flag;
 	}
@@ -40,7 +40,7 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public int delete(MemberVO vo) {
 		logger.info("delete()..." + vo);
-		int flag = 0;
+		int flag = sqlSession.delete("DELETE", vo);
 
 		return flag;
 	}
@@ -49,7 +49,7 @@ public class MemberDAOimpl implements MemberDAO {
 	public MemberVO selectOne(MemberVO vo) {
 		logger.info("selectOne()..." + vo);
 
-		MemberVO vo2 = new MemberVO();
+		MemberVO vo2 = sqlSession.selectOne("SELECT_ONE", vo);
 
 		return vo2;
 	}
@@ -69,8 +69,12 @@ public class MemberDAOimpl implements MemberDAO {
 		logger.info("searchKey : " + searchKey);
 		logger.info("searchWord : " + searchWord);
 
-		List<MemberVO> vos = new ArrayList<>();
-
+		List<MemberVO> vos = null;
+		if (searchKey.equals("name")) {
+			vos = sqlSession.selectList("SEARCH_LIST_NAME", "%" + searchWord + "%");
+		} else {
+			vos = sqlSession.selectList("SEARCH_LIST_TEL", "%" + searchWord + "%");
+		}
 		return vos;
 	}
 
@@ -87,7 +91,7 @@ public class MemberDAOimpl implements MemberDAO {
 	public MemberVO login(MemberVO vo) {
 		logger.info("login()..." + vo);
 
-		MemberVO vo2 = null;
+		MemberVO vo2 = sqlSession.selectOne("LOGIN", vo);
 
 		return vo2;
 	}
