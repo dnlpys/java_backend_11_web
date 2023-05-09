@@ -42,7 +42,7 @@
 <body>
 	<h1>회원정보</h1>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
-	<table border="1">
+	<table id="memberList">
 	<thead>
 		<tr>
 			<th>num</th>

@@ -16,24 +16,6 @@
 	});
 	function idCheck() {
 		console.log('idCheck()....');
-		
-		//1.javascript ajax
-// 		const xhttp = new XMLHttpRequest();
-// 		xhttp.onload = function() {
-			
-// 			console.log(this.responseText);
-			
-// 			let msg = JSON.parse(this.responseText).result === 'OK'?'사용가능':'사용중'
-			
-// 			document.getElementById("demo").innerHTML = msg;
-// 		};
-
-// 		let id = document.getElementById("id").value;
-// 		console.log('id:', id);
-// 		xhttp.open("GET", "json_idCheck.do?id=" + id);
-// 		xhttp.send();
-
-		//2.jquery ajax
 		console.log('id:',$("#id").val());
 		$.ajax({
 			url : "json_idCheck.do",
@@ -48,11 +30,11 @@
 			},
 			error:function(xhr,status,error){
 				console.log('xhr.status:', xhr.status);
-// 				console.log('status:', status);
-// 				console.log('error:', error);
 			}
 		});
 	}
+	
+	
 </script>
 </head>
 <body>

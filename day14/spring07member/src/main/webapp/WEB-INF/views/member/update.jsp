@@ -40,7 +40,7 @@ $(function(){
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 
 	<form action="m_updateOK.do" method="post">
-		<table>
+		<table id="memberList">
 			<tr>
 				<td><label for="num">num:</label></td>
 				<td><span id="span_num"></span><input type="hidden" id="num" name="num"

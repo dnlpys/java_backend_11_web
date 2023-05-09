@@ -18,5 +18,6 @@
 	<a href="json_selectAll.do">json_selectAll.do</a>
 	<a href="json_idCheck.do?id=tester">json_idCheck.do</a>
 	<a href="json_insertOK.do?id=testerbb&pw=hi11&name=han&tel=031">json_insertOK.do</a>
+	<a href="json_searchList.do?searchKey=name&searchWord=ki">json_searchList.do</a>
 </body>
 </html>
