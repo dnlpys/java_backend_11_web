@@ -22,8 +22,14 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public int insert(MemberVO vo) {
 		log.info("insert()..." + vo);
-		int flag = sqlSession.insert("INSERT", vo);
+		int flag = 0;
 
+		try {
+			flag = sqlSession.insert("INSERT", vo);
+		} catch (Exception e) {
+			
+		}
+		
 		return flag;
 	}
 
@@ -80,7 +86,7 @@ public class MemberDAOimpl implements MemberDAO {
 	public MemberVO idCheck(MemberVO vo) {
 		log.info("idCheck()..." + vo);
 
-		MemberVO vo2 = null;
+		MemberVO vo2 = sqlSession.selectOne("ID_CHECK", vo);
 
 		return vo2;
 	}

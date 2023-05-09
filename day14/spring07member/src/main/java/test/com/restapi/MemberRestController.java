@@ -22,10 +22,8 @@ import test.com.restapi.member.service.MemberService;
 @Slf4j
 public class MemberRestController {
 
-
 	@Autowired
 	private MemberService service;
-
 
 	// 객체리턴시는 produces 설정 제거할것
 	@RequestMapping(value = "/json_vo.do", method = RequestMethod.GET)
@@ -44,18 +42,18 @@ public class MemberRestController {
 
 		return vo;
 	}
-	
+
 	// 객체리턴시는 produces 설정 제거할것
 	@RequestMapping(value = "/json_selectOne.do", method = RequestMethod.GET)
 	@ResponseBody
 	public MemberVO json_selectOne(MemberVO vo) {
 		log.info("/json_selectOne.do");
-		log.info("{}",vo);
-		
+		log.info("{}", vo);
+
 		// selectOne
 		MemberVO vo2 = service.selectOne(vo);
 		log.info("{}", vo2);
-		
+
 		return vo2;
 	}
 
@@ -80,17 +78,15 @@ public class MemberRestController {
 		return vos;
 	}
 
-	
 	@RequestMapping(value = "/json_selectAll.do", method = RequestMethod.GET)
 	@ResponseBody
 	public List<MemberVO> json_selectAll() {
 		log.info("/json_selectAll.do");
 		// selectAll,searchList
 		List<MemberVO> vos = service.selectAll();
-		log.info("vos.size():{}",vos.size());
+		log.info("vos.size():{}", vos.size());
 		return vos;
 	}
-
 
 	@RequestMapping(value = "/json_result.do", method = RequestMethod.GET)
 	@ResponseBody
@@ -103,20 +99,39 @@ public class MemberRestController {
 		map.put("result", "OK");
 		return map;
 	}
-	
-	
+
 	@RequestMapping(value = "/json_idCheck.do", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> json_idCheck(MemberVO vo) {
 		log.info("/json_idCheck.do");
-		log.info("{}",vo);//id
-		
+		log.info("{}", vo);// id
+
 		MemberVO vo2 = service.idCheck(vo);
-		log.info("{}",vo2);//null or not null
-		
-		
+		log.info("{}", vo2);// null or not null
+
+		String msg = "OK";
+		if (vo2 != null) {
+			msg = "Not OK";
+		}
+
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("result", "OK");
+		map.put("result", msg);
+		return map;
+	}
+
+	@RequestMapping(value = "/json_insertOK.do", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, String> json_insertOK(MemberVO vo) {
+		log.info("/json_insertOK.do");
+		log.info("{}", vo);// id,pw,name,tel
+
+		int result = service.insert(vo);
+		log.info("result:{}", result);// 0 or 1
+
+		String msg = result == 1 ? "1" : "0";
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("result", msg);
 		return map;
 	}
 

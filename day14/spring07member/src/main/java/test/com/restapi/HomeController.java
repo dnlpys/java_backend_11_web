@@ -36,4 +36,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	public String index() {
+		logger.info("/index.do");
+		
+		return "index";
+	}
+	
 }
