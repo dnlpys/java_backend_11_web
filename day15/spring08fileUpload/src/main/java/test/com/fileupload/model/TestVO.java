@@ -1,4 +1,4 @@
-package test.com.fileupload;
+package test.com.fileupload.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
